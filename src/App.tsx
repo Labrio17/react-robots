@@ -1,8 +1,8 @@
 import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom'
 import './App.css'
-import HomePage from './pages/HomePage'
 import DetailPage from './pages/DetailPage'
-
+import { lazy, Suspense } from 'react'
+const HomePage = lazy(() => import('./pages/HomePage')) 
 
 const router = createBrowserRouter([
   {
@@ -20,7 +20,9 @@ const router = createBrowserRouter([
 ])
 
 function App() {
-  return <RouterProvider router={router} />
+  return <Suspense fallback={<p> Waiting for Lazy Load</p>}>
+    <RouterProvider router={router} />
+  </Suspense>
 }
   
 
